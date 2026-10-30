@@ -1,0 +1,22 @@
+{
+  "name": "automation-exercise-cypress",
+  "version": "1.0.0",
+  "description": "Trabalho de conclusão - Automação Web com Cypress no site Automation Exercise",
+  "scripts": {
+    "cy:open": "cypress open",
+    "test": "cypress run --spec \"cypress/e2e/trabalho-final/**/*.cy.js\"",
+    "test:chrome": "cypress run --browser chrome --spec \"cypress/e2e/trabalho-final/**/*.cy.js\""
+  },
+  "keywords": [
+    "cypress",
+    "e2e",
+    "automation-exercise",
+    "mochawesome"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "cypress": "^15.0.0",
+    "cypress-mochawesome-reporter": "^3.8.2"
+  }
+}

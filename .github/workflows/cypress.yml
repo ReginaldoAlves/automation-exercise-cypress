@@ -1,0 +1,45 @@
+name: Testes E2E - Automation Exercise
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  cypress-run:
+    name: Executar testes Cypress
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Executar testes do trabalho final
+        uses: cypress-io/github-action@v6
+        with:
+          install-command: npm install
+          browser: chrome
+          spec: cypress/e2e/trabalho-final/**/*.cy.js
+
+      - name: Publicar relatório Mochawesome
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-mochawesome
+          path: cypress/reports/html
+          retention-days: 30
+
+      - name: Publicar screenshots de falhas
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore
